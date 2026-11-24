@@ -1,0 +1,52 @@
+---
+title: Asset mapping
+format: gfm
+---
+
+This is a small lab with only 1 task (moved here from the OSM lab). You'll make an asset map, which is a type of map that focuses on assets of an area. Feel free to add other locations you know about besides what's in OSM, or to filter the data for what's actually important in that area. What amenities does the area have to offer? What are its anchor institutions? What locations bring people together or provide resources?
+
+This works best with an area you're familiar with personally, because some of these assets simply won't be found in data created by outsiders. For example, a weird spot of broken curb won't be in any dataset but might be a skateboarder gathering spot; your local diner might look ordinary on paper/screen but is where everybody runs into each other after church.
+
+Use whatever you'd like to help orient your reader, such as basemaps, streets, or town/tract boundaries.
+
+
+```{r}
+#| label: setup
+library(ggplot2)
+library(sf)
+
+```
+
+
+```{r}
+#| label: bbox 
+# do whatever you want to get an area to work with,
+# then get its bbox
+
+```
+
+```{r}
+#| label: asset-osm-data
+ 
+```
+
+(Copied from OSM lab:) Here's a function I wrote to convert the type of bounding box returned by `osmdata::getbb` into a proper `sf` bounding box that you can use to filter or crop your shapes (for my map, I cropped things like roads that stretched outside the boundaries I wanted).
+
+```{r}
+#| label: bbox-converter
+osm_bb_to_sf_bb <- function(bb, crs = 4269) {
+    p1 <- c(bb["x", "min"], bb["y", "min"])
+    p2 <- c(bb["x", "max"], bb["y", "max"])
+    p1_sf <- sf::st_point(p1)
+    p2_sf <- sf::st_point(p2)
+    pts_sf <- sf::st_sfc(p1_sf, p2_sf, crs = crs)
+    sf::st_bbox(pts_sf)
+}
+```
+
+
+```{r}
+#| label: asset-map 
+ 
+```
+
